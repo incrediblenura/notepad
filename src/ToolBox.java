@@ -17,41 +17,45 @@ public class ToolBox extends JTabbedPane
 		setLayout(new BorderLayout());
 		editor = new Editor(width,height);
 		editor.getDocument().addDocumentListener(new DocumentListener(){
-				public String getText()
-	{
-		int caretPosition = editor.getDocument().getLength();
-	    Element root = editor.getDocument().getDefaultRootElement();
-        String text = "1" + System.getProperty("line.separator");
-        for(int i = 2; i < root.getElementIndex(caretPosition) + 2; i++)
+		public String getText()
 		{
-            text += i + System.getProperty("line.separator");
-        }
-        return text;	
+			int caretPosition = editor.getDocument().getLength();
+			Element root = editor.getDocument().getDefaultRootElement();
+			String text = "1" + System.getProperty("line.separator");
+			for(int i = 2; i < root.getElementIndex(caretPosition) + 2; i++)
+			{
+				text += i + System.getProperty("line.separator");
+			}
+			return text;	
+		}
+		@Override
+		public void changedUpdate(DocumentEvent de)
+		{
+			lines.setText(getText());
+		}
+		@Override
+		public void insertUpdate(DocumentEvent de)
+		{
+			lines.setText(getText());
+		}
+		@Override
+		public void removeUpdate(DocumentEvent de)
+		{
+			lines.setText(getText());
+		}});
+		lines = new NPLineNumber();
+		scroll_panel = new JScrollPane();
+		scroll_panel.getViewport().add(editor);
+		scroll_panel.setRowHeaderView(lines);
+		setBounds(0,30,width,height);
+		add("untitled",scroll_panel);
 	}
-	@Override
-	public void changedUpdate(DocumentEvent de)
+	public void setText(String str)
 	{
-		lines.setText(getText());
+		editor.setText(str);
 	}
-	@Override
-	public void insertUpdate(DocumentEvent de)
+	public String getText()
 	{
-		lines.setText(getText());
-	}
-	@Override
-	public void removeUpdate(DocumentEvent de)
-	{
-		lines.setText(getText());
-	}});
-	lines = new NPLineNumber();
-	scroll_panel = new JScrollPane();
-	scroll_panel.getViewport().add(editor);
-	scroll_panel.setRowHeaderView(lines);
-	setBounds(0,0,width,height);
-	add("untitled",scroll_panel);
-	}
-	public void setText(String text)
-	{
-		editor.setText(text);
-	}
+		return editor.getText();
+	}	
 }

@@ -1,6 +1,8 @@
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import java.io.FileWriter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 public class NPMenu extends JMenu implements ActionListener
@@ -29,7 +31,15 @@ public class NPMenu extends JMenu implements ActionListener
 			JFileChooser file_chooser = new JFileChooser();
 			int outcome = file_chooser.showOpenDialog(this);
 			if(outcome == JFileChooser.APPROVE_OPTION)
-				Notepad.openFile(file_chooser.getSelectedFile().getPath());
+			{
+				Notepad.openFile(file_chooser.getSelectedFile().getPath(),file_chooser.getSelectedFile().getName());
+			}
+		}
+		else if(ae.getSource() == save)
+		{
+			JFileChooser fc = new JFileChooser();
+			int outcome  = fc.showSaveDialog(this);
+			Notepad.saveFile(fc.getSelectedFile());
 		}
 		else if(ae.getSource() == exit)
 		{
