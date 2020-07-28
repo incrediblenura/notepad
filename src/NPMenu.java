@@ -13,9 +13,9 @@ public class NPMenu extends JMenu implements ActionListener
 	public NPMenu(String menu_title)
 	{
 		super(menu_title);
-		open = new NPMenuItem("Open File...", KeyEvent.VK_O);
+		open = new NPMenuItem("Open File...\tCtrl+O", KeyEvent.VK_O);
 		open.addActionListener(this);
-		save = new NPMenuItem("Save File...", KeyEvent.VK_S);
+		save = new NPMenuItem("Save File...\tCtrl+S", KeyEvent.VK_S);
 		save.addActionListener(this);
 		exit = new NPMenuItem("Exit");
 		exit.addActionListener(this);

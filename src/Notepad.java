@@ -4,70 +4,40 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.File;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
 import java.io.FileWriter;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 public class Notepad extends JFrame
 {
 	private static ToolBox toolbox;
-	private final NPMenuBar menu;
-//	private final static String WARNING_MSG = "1B[31m";
+	private static NPFunctions funcs;
 	private static final int height = 500;
 	private static final int width = 700;
 	public Notepad()
 	{
 		super("Notepad");
-		toolbox = new ToolBox(width,height);
-		menu = new NPMenuBar();
+		toolbox = new ToolBox(width,height,JTabbedPane.TOP);
+		funcs = new NPFunctions();
+		setJMenuBar(new NPMenuBar());
 		setLayout(new BorderLayout());
-		setJMenuBar(menu);
-		add(toolbox,BorderLayout.CENTER);
+		add(toolbox);
 		setSize(700,400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocation(300,100);
+		setLocationByPlatform(true);
 		setVisible(true);
 	}
-
 	public static void openFile(String pathToFile,String fileName)
 	{
-		BufferedReader buffer = null;
-		try
-		{
-			buffer = new BufferedReader(new java.io.FileReader(pathToFile));
-			String str1 = "", str2 = "";
-			while((str1 = buffer.readLine())!=null)
-			{
-				str2 += str1+"\n";
-				toolbox.setText(str2);
-			}
-			buffer.close();
-		}
-		catch(FileNotFoundException no_file_exc)
-		{
-			JOptionPane.showMessageDialog(null, no_file_exc,"FileNotFoundException",JOptionPane.WARNING_MESSAGE);
-		}
-		catch(IOException io_exc)
-		{
-			JOptionPane.showMessageDialog(null, io_exc,"IOException",JOptionPane.WARNING_MESSAGE);
-		}
+		funcs.openFile(pathToFile,fileName,toolbox.getEditor());
 	}
-	
-	public static void saveFile(File file)
+	public static void saveFile(File pathToFile)
 	{
-		try
-		{
-			FileWriter fileWriter = new FileWriter(file);
-			String txt = toolbox.getText();
-			fileWriter.write(txt);
-			fileWriter.close();
-		}
-		catch(Exception exec)
-		{
-			JOptionPane.showMessageDialog(null, exec,"Exception",JOptionPane.WARNING_MESSAGE);
-		}
+		funcs.saveFile(pathToFile,toolbox.getEditor());
 	}
-	
 	public static void main(String args[])
 	{
 		SwingUtilities.invokeLater(new Runnable(){
