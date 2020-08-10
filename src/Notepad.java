@@ -5,12 +5,13 @@ import java.io.IOException;
 import java.io.File;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JLabel;
+import javax.swing.UIManager;
 import java.io.FileWriter;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
+import javax.swing.UnsupportedLookAndFeelException;
 public class Notepad extends JFrame
 {
 	private static ToolBox toolbox;
@@ -20,6 +21,22 @@ public class Notepad extends JFrame
 	public Notepad()
 	{
 		super("Notepad");
+		try
+		{
+			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+		}catch(ClassNotFoundException cnfe)
+		{
+			JOptionPane.showMessageDialog(null,"ClassNotFoundException",cnfe.getMessage(),JOptionPane.ERROR_MESSAGE);
+		}catch(InstantiationException inse)
+		{
+			JOptionPane.showMessageDialog(null,"InstantiationException",inse.getMessage(),JOptionPane.ERROR_MESSAGE);
+		}catch(IllegalAccessException ille)
+		{
+			JOptionPane.showMessageDialog(null,"IllegalAccessException",ille.getMessage(),JOptionPane.ERROR_MESSAGE);
+		}catch(UnsupportedLookAndFeelException ulafe)
+		{
+			JOptionPane.showMessageDialog(null,"UnsupportedLookAndFeelException",ulafe.getMessage(),JOptionPane.ERROR_MESSAGE);
+		}
 		toolbox = new ToolBox(width,height,JTabbedPane.TOP);
 		funcs = new NPFunctions();
 		setJMenuBar(new NPMenuBar());
