@@ -16,6 +16,7 @@ public class Notepad extends JFrame
 {
 	private static ToolBox toolbox;
 	private static NPFunctions funcs;
+	private JPanel jpanel = new JPanel();
 	private static final int height = 500;
 	private static final int width = 700;
 	public Notepad()
@@ -41,7 +42,7 @@ public class Notepad extends JFrame
 		funcs = new NPFunctions();
 		setJMenuBar(new NPMenuBar());
 		setLayout(new BorderLayout());
-		add(toolbox);
+		add(toolbox,BorderLayout.CENTER);
 		setSize(700,400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationByPlatform(true);

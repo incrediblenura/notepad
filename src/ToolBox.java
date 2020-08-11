@@ -17,7 +17,8 @@ public class ToolBox extends JTabbedPane
 	public ToolBox(int width,int height,int tabpos)
 	{
 		super(tabpos);
-		setLayout(new BorderLayout());
+		panel = new JPanel(new BorderLayout());
+		//setLayout(new BorderLayout());
 		editor = new Editor(width,height);
 		editor.getDocument().addDocumentListener(
 			new DocumentListener()
@@ -51,10 +52,10 @@ public class ToolBox extends JTabbedPane
 			}
 		);
 		lines = new NPLineNumber();
-		scroll_panel = new JScrollPane();
-		scroll_panel.getViewport().add(editor);
+		scroll_panel = new JScrollPane(editor,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroll_panel.setRowHeaderView(lines);
-		add(scroll_panel,BorderLayout.EAST);
+		panel.add(scroll_panel,BorderLayout.CENTER);
+		add("untitled",panel);
 	}
 	public void setText(String str)
 	{
