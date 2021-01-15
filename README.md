@@ -12,4 +12,6 @@
 javac -d . src/*.java
 java Notepad
 ```
-![screenshot!](https://github.com/incrediblenura/notepad/blob/master/images/img0.png?raw=true)
+![screenshot1](https://github.com/incrediblenura/notepad/blob/master/images/img0.png?raw=true)
+![screenshot2](https://github.com/incrediblenura/notepad/blob/master/images/img1.png?raw=true)
+![screenshot3](https://github.com/incrediblenura/notepad/blob/master/images/img2.png?raw=true)
