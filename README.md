@@ -8,7 +8,8 @@
 [See code here](https://github.com/incrediblenura/notepad)
 > Object Oriented Notepad in JAVA Swing API
 
-```java
+```shell
 javac -d . src/*.java
 java Notepad
 ```
+![screenshot!](https://github.com/incrediblenura/notepad/blob/master/img0.jpg?raw=true)
